@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#pets-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#pets-table th, #pets-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#pets-table th {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+#pets-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#pets-table tr:hover {
+    background-color: #eaeaea;
+}
+
+img {
+    width: 400px; /* или другой подходящий размер */
+    height: auto;
+}
+
+#search-bar, #filters {
+    margin-bottom: 20px;
+}
