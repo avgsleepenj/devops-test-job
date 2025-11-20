@@ -7,7 +7,7 @@ from logging import StreamHandler
 # Параметры подключения
 username = os.getenv('USERNAME_DATABASE')
 password = os.getenv('PASSWORD_DATABASE')
-host = "mongo-db"  
+host = "mongodb"  
 port = os.getenv('PORT_DATABASE')
 dbname = os.getenv('NAME_DATABASE')
 
