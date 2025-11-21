@@ -77,4 +77,4 @@ def get_cats():
     return jsonify(cats_list)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888)
+    app.run(host='0.0.0.0', port=88)

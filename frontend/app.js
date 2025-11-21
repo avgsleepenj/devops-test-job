@@ -5,7 +5,7 @@ function applyFilters() {
     var breed = $('#filter-breed').val();
     var status = $('#filter-status').val();
 
-    $.getJSON('http://localhost:8888/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
+    $.getJSON('http://127.0.0.1:88/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
 
         // Очистить текущее содержимое таблицы, кроме заголовка
         $('#pets-table tr:not(:first)').remove();
