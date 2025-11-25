@@ -7,7 +7,7 @@ from logging import StreamHandler
 # Параметры подключения
 username = os.getenv('USERNAME_DATABASE')
 password = os.getenv('PASSWORD_DATABASE')
-host = "mongo-db"  
+host = "mongodb"  # Исправлено с "mongo-db" на "mongodb"
 port = os.getenv('PORT_DATABASE')
 dbname = os.getenv('NAME_DATABASE')
 
@@ -35,46 +35,56 @@ cats_data = [
 
 
 def add_cats_to_db():
-    cats_collection = mongo.db.cats
-    for cat in cats_data:
-        # Проверяем, существует ли уже такая запись
-        if cats_collection.count_documents({"name": cat["name"]}) == 0:
-            cats_collection.insert_one(cat)
-            print(f"Добавлена кошка: {cat['name']}")
-        else:
-            print(f"Кошка {cat['name']} уже существует в базе данных.")
-
-
-# Вызываем функцию добавления кошек в базу данных при старте скрипта
-add_cats_to_db()
+    try:
+        cats_collection = mongo.db.cats
+        for cat in cats_data:
+            # Проверяем, существует ли уже такая запись
+            if cats_collection.count_documents({"name": cat["name"]}) == 0:
+                cats_collection.insert_one(cat)
+                app.logger.info(f"Добавлена кошка: {cat['name']}")
+            else:
+                app.logger.info(f"Кошка {cat['name']} уже существует в базе данных.")
+    except Exception as e:
+        app.logger.error(f"Ошибка при добавлении кошек в БД: {e}")
 
 
 @app.route('/api/cats', methods=['GET'])
 def get_cats():
-    # Get filters from request parameters
-    age = request.args.get('age')
-    name = request.args.get('name')
-    breed = request.args.get('breed')
-    status = request.args.get('status')
+    try:
+        # Get filters from request parameters
+        age = request.args.get('age')
+        name = request.args.get('name')
+        breed = request.args.get('breed')
+        status = request.args.get('status')
 
-    # Build query
-    query = {}
-    if age:
-        query['age'] = int(age)
-    if name:
-        query['name'] = name
-    if breed:
-        query['breed'] = breed
-    if status:
-        query['status'] = status
+        # Build query
+        query = {}
+        if age:
+            query['age'] = int(age)
+        if name:
+            query['name'] = {'$regex': name, '$options': 'i'}  # Поиск по подстроке
+        if breed:
+            query['breed'] = {'$regex': breed, '$options': 'i'}  # Поиск по подстроке
+        if status:
+            query['status'] = {'$regex': status, '$options': 'i'}  # Поиск по подстроке
 
-    # Query the database
-    cats = mongo.db.cats.find(query)
+        # Query the database
+        cats = mongo.db.cats.find(query)
 
-    # Convert to list of dicts
-    cats_list = [{**cat, '_id': str(cat['_id'])} for cat in cats]
+        # Convert to list of dicts
+        cats_list = [{**cat, '_id': str(cat['_id'])} for cat in cats]
 
-    return jsonify(cats_list)
+        return jsonify(cats_list)
+    except Exception as e:
+        app.logger.error(f"Ошибка при получении данных: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888)
+    # Добавляем кошек в БД при старте приложения
+    with app.app_context():
+        add_cats_to_db()
+    app.run(host='0.0.0.0', port=8888, debug=True)
