@@ -5,7 +5,7 @@ function applyFilters() {
     var breed = $('#filter-breed').val();
     var status = $('#filter-status').val();
 
-    $.getJSON('http://localhost:8888/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
+    $.getJSON('/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
 
         // Очистить текущее содержимое таблицы, кроме заголовка
         $('#pets-table tr:not(:first)').remove();
@@ -23,8 +23,13 @@ function applyFilters() {
         
         // Добавление новых строк в таблицу
         $('#pets-table').append(rows);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Ошибка при загрузке данных:', textStatus, errorThrown);
+        alert('Ошибка при загрузке данных. Проверьте консоль для подробностей.');
     });
 }
 
-// Загрузка начальных данных
-applyFilters();
+// Загрузка начальных данных при загрузке страницы
+$(document).ready(function() {
+    applyFilters();
+});
