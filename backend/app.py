@@ -7,7 +7,8 @@ from logging import StreamHandler
 # Параметры подключения
 username = os.getenv('USERNAME_DATABASE')
 password = os.getenv('PASSWORD_DATABASE')
-host = "mongo-db"  
+# ИСПРАВИЛ ИМЯ ХОСТА С mongo-db НА mongodb КАК В docker-compose
+host = "mongodb"  
 port = os.getenv('PORT_DATABASE')
 dbname = os.getenv('NAME_DATABASE')
 
