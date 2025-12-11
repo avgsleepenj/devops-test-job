@@ -1,5 +1,6 @@
 version: '3.7'
 services:
+
   backend:
     env_file:
       .env
@@ -7,9 +8,11 @@ services:
     image: backend:1.0.1
     container_name: backend
     depends_on:
-      - mongodb
+      - mongo-db
     networks:
       - external
+      - internal
+
   frontend:
     build: ./frontend
     image: frontend:1.0.1
@@ -17,16 +20,17 @@ services:
     ports:
       - 88:88
     volumes:
-      - "./frontend/nginx.conf:/etc/nginx/nginx.conf"
+      - "./frontend/default.conf:/etc/nginx/conf.d/default.conf"
     depends_on:
       - backend
     networks:
       - external
-  mongodb:
+
+  mongo-db:
     env_file:
       .env
     image: mongo:7.0-rc
-    container_name: mongodb
+    container_name: mongo-db
     environment:
       MONGO_INITDB_DATABASE: ${NAME_DATABASE}
       MONGO_INITDB_ROOT_USERNAME: ${USERNAME_DATABASE}

@@ -5,7 +5,8 @@ function applyFilters() {
     var breed = $('#filter-breed').val();
     var status = $('#filter-status').val();
 
-    $.getJSON('http://localhost:8888/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
+// b64_0YPRg9GDLCDQv9C+0LPRgNC+0LzQvNC40YHRgtGLIQo=_ теперь будеть корректно работать везде, а не только на локалхосте
+    $.getJSON('/api/cats', {name: name, age: age, breed: breed, status: status }, function(data) {
 
         // Очистить текущее содержимое таблицы, кроме заголовка
         $('#pets-table tr:not(:first)').remove();
