@@ -9,7 +9,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - external
+      - internal
   frontend:
     build: ./frontend
     image: frontend:1.0.1
@@ -21,6 +21,7 @@ services:
     depends_on:
       - backend
     networks:
+      - internal
       - external
   mongodb:
     env_file:
