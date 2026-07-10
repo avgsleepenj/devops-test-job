@@ -1,15 +1,18 @@
 version: '3.7'
 services:
   backend:
-    env_file:
-      .env
+    env_file: .env
     build: ./backend
+    ports:
+      - "8888:8888"
     image: backend:1.0.1
     container_name: backend
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - external
+      - internal
   frontend:
     build: ./frontend
     image: frontend:1.0.1
@@ -23,9 +26,8 @@ services:
     networks:
       - external
   mongodb:
-    env_file:
-      .env
-    image: mongo:7.0-rc
+    env_file: .env
+    image: mongo:7.0.15
     container_name: mongodb
     environment:
       MONGO_INITDB_DATABASE: ${NAME_DATABASE}
@@ -35,7 +37,11 @@ services:
       - mongo_data:/data/db
     networks:
       - internal
-
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   mongo_data:
 
