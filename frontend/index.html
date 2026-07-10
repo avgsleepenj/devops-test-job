@@ -1,42 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Shelter</title>
+    <title>Кошачий приют — Кошкин дом</title>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>Кошачий приют - Кошкин дом</h1>
+<div class="container">
 
-</br>
+    <header>
+        <h1>🐱 Кошачий приют «Кошкин дом»</h1>
 
-<h2>Все указанные тут кошки взяты с сайта <a href="https://daesh.vsemposobake.ru/moscow_cats">московского приюта</a> и могут быть взяты в вашу семью</h2>
+        <p class="subtitle">
+            Все представленные здесь кошки взяты с
+            <a href="https://daesh.vsemposobake.ru/moscow_cats" target="_blank">
+                московского приюта
+            </a>
+            и ждут любящую семью ❤️
+        </p>
+    </header>
 
-</br>
+    <section id="filters">
 
-<div id="filters">
-    <input type="name" id="filter-name" placeholder="Имя">
-    <input type="number" id="filter-age" placeholder="Возраст">
-    <input type="text" id="filter-breed" placeholder="Порода">
-    <input type="text" id="filter-status" placeholder="Статус">
-    <button onclick="applyFilters()">Фильтр</button>
+        <input type="text" id="filter-name" placeholder="Имя">
+
+        <input type="number" id="filter-age" placeholder="Возраст">
+
+        <input type="text" id="filter-breed" placeholder="Порода">
+
+        <input type="text" id="filter-status" placeholder="Статус">
+
+        <button onclick="applyFilters()">
+            🔍 Найти
+        </button>
+
+    </section>
+
+    <table id="pets-table">
+
+        <thead>
+
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Порода</th>
+            <th>Фото</th>
+            <th>Статус</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+        <!-- Таблица заполняется app.js -->
+        </tbody>
+
+    </table>
+
 </div>
 
-</br>
-
-<table id="pets-table">
-    <tr>
-        <th>Имя</th>
-        <th>Возраст</th>
-        <th>Порода</th>
-        <th>Фото</th>
-        <th>Статус</th>
-    </tr>
-    <!-- Содержимое таблицы будет сгенерировано скриптом JS -->
-</table>
 <script src="app.js"></script>
+
 </body>
 </html>
