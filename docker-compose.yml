@@ -35,6 +35,7 @@ services:
       - mongo_data:/data/db
     networks:
       - internal
+      - external
 
 volumes:
   mongo_data:
