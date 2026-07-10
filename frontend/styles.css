@@ -1,36 +1,307 @@
-body {
-    font-family: Arial, sans-serif;
+/* ===========================
+   Общие настройки
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    background: #f4f6f9;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #2c3e50;
+    padding: 40px;
+}
+
+/* ===========================
+   Контейнер
+=========================== */
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+/* ===========================
+   Заголовок
+=========================== */
+
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.subtitle a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.subtitle a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Блок фильтров
+=========================== */
+
+#filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 35px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+#filters input {
+
+    width: 180px;
+
+    padding: 12px 15px;
+
+    font-size: 15px;
+
+    border: 1px solid #d6d6d6;
+
+    border-radius: 8px;
+
+    transition: .25s;
+}
+
+#filters input:focus {
+
+    outline: none;
+
+    border-color: #3498db;
+
+    box-shadow: 0 0 10px rgba(52, 152, 219, .25);
+
+}
+
+button {
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #3498db;
+
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+button:hover {
+
+    background: #2980b9;
+
+    transform: translateY(-2px);
+
+}
+
+button:active {
+
+    transform: scale(.98);
+
+}
+
+/* ===========================
+   Таблица
+=========================== */
 
 #pets-table {
+
     width: 100%;
+
     border-collapse: collapse;
+
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+
 }
 
-#pets-table th, #pets-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+#pets-table thead {
+
+    background: linear-gradient(135deg,#3498db,#5dade2);
+
+    color: white;
+
 }
 
 #pets-table th {
-    background-color: #f2f2f2;
-    color: black;
+
+    padding: 18px;
+
+    font-size: 16px;
+
+    text-align: center;
+
 }
 
-#pets-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+#pets-table td {
+
+    padding: 20px;
+
+    border-bottom: 1px solid #ececec;
+
+    text-align: center;
+
+    vertical-align: middle;
+
 }
 
-#pets-table tr:hover {
-    background-color: #eaeaea;
+#pets-table tr:last-child td {
+
+    border-bottom: none;
+
 }
+
+#pets-table tbody tr:nth-child(even) {
+
+    background: #fafafa;
+
+}
+
+#pets-table tbody tr:hover {
+
+    background: #eef7ff;
+
+    transition: .2s;
+
+}
+
+/* ===========================
+   Фото кошек
+=========================== */
 
 img {
-    width: 400px; /* или другой подходящий размер */
-    height: auto;
+
+    width: 220px;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+
+    transition: .3s;
+
 }
 
-#search-bar, #filters {
-    margin-bottom: 20px;
+img:hover {
+
+    transform: scale(1.05);
+
+}
+
+/* ===========================
+   Адаптивность
+=========================== */
+
+@media (max-width: 1100px) {
+
+    #filters {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    #filters input,
+    button {
+
+        width: 100%;
+
+    }
+
+    img {
+
+        width: 150px;
+
+        height: 150px;
+
+    }
+
+    #pets-table {
+
+        font-size: 14px;
+
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 15px;
+
+    }
+
+    header h1 {
+
+        font-size: 30px;
+
+    }
+
+    .subtitle {
+
+        font-size: 16px;
+
+    }
+
+    #pets-table th,
+    #pets-table td {
+
+        padding: 10px;
+
+    }
+
+    img {
+
+        width: 120px;
+
+        height: 120px;
+
+    }
+
 }
