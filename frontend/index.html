@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Shelter</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<h1>Кошачий приют - Кошкин дом</h1>
+
+</br>
+
+<h2>Все указанные тут кошки взяты с сайта <a href="https://daesh.vsemposobake.ru/moscow_cats">московского приюта</a> и могут быть взяты в вашу семью</h2>
+
+</br>
+
+<div id="filters">
+    <input type="name" id="filter-name" placeholder="Имя">
+    <input type="number" id="filter-age" placeholder="Возраст">
+    <input type="text" id="filter-breed" placeholder="Порода">
+    <input type="text" id="filter-status" placeholder="Статус">
+    <button onclick="applyFilters()">Фильтр</button>
+</div>
+
+</br>
+
+<table id="pets-table">
+    <tr>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th>Порода</th>
+        <th>Фото</th>
+        <th>Статус</th>
+    </tr>
+    <!-- Содержимое таблицы будет сгенерировано скриптом JS -->
+</table>
+<script src="app.js"></script>
+</body>
+</html>
