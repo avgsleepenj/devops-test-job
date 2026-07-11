@@ -1,42 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Shelter</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Кошки московского приюта, которые ищут дом">
+    <title>Кошкин дом — кошачий приют</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
+    <header class="hero">
+        <div class="hero__content">
+            <p class="eyebrow">Кошачий приют</p>
+            <h1>Кошкин дом</h1>
+            <p class="hero__text">
+                Познакомьтесь с питомцами, которые ищут заботливую семью.
+                Информация о животных взята с сайта
+                <a href="https://daesh.vsemposobake.ru/moscow_cats" target="_blank" rel="noopener noreferrer">
+                    московского приюта
+                </a>.
+            </p>
+        </div>
+    </header>
 
-<h1>Кошачий приют - Кошкин дом</h1>
+    <main class="container">
+        <section class="panel" aria-labelledby="filters-title">
+            <div class="panel__heading">
+                <div>
+                    <p class="eyebrow">Поиск</p>
+                    <h2 id="filters-title">Найдите своего питомца</h2>
+                </div>
+                <p id="result-count" class="result-count" aria-live="polite"></p>
+            </div>
 
-</br>
+            <form id="filters" class="filters">
+                <label>
+                    <span>Имя</span>
+                    <input type="search" id="filter-name" name="name" placeholder="Например, Лисса" autocomplete="off">
+                </label>
+                <label>
+                    <span>Возраст</span>
+                    <input type="number" id="filter-age" name="age" placeholder="4" min="0" max="40">
+                </label>
+                <label>
+                    <span>Порода</span>
+                    <input type="search" id="filter-breed" name="breed" placeholder="Метис" autocomplete="off">
+                </label>
+                <label>
+                    <span>Статус</span>
+                    <input type="search" id="filter-status" name="status" placeholder="Ищет дом" autocomplete="off">
+                </label>
+                <div class="filters__actions">
+                    <button class="button button--primary" type="submit">Показать</button>
+                    <button class="button button--secondary" type="reset">Сбросить</button>
+                </div>
+            </form>
+        </section>
 
-<h2>Все указанные тут кошки взяты с сайта <a href="https://daesh.vsemposobake.ru/moscow_cats">московского приюта</a> и могут быть взяты в вашу семью</h2>
+        <section aria-labelledby="pets-title">
+            <h2 id="pets-title" class="visually-hidden">Список кошек</h2>
+            <div id="status" class="status" role="status" aria-live="polite">Загружаем питомцев…</div>
+            <div id="pets-list" class="pets-grid" hidden></div>
+        </section>
+    </main>
 
-</br>
-
-<div id="filters">
-    <input type="name" id="filter-name" placeholder="Имя">
-    <input type="number" id="filter-age" placeholder="Возраст">
-    <input type="text" id="filter-breed" placeholder="Порода">
-    <input type="text" id="filter-status" placeholder="Статус">
-    <button onclick="applyFilters()">Фильтр</button>
-</div>
-
-</br>
-
-<table id="pets-table">
-    <tr>
-        <th>Имя</th>
-        <th>Возраст</th>
-        <th>Порода</th>
-        <th>Фото</th>
-        <th>Статус</th>
-    </tr>
-    <!-- Содержимое таблицы будет сгенерировано скриптом JS -->
-</table>
-<script src="app.js"></script>
+    <footer>
+        <p>Каждому дому нужен кот. Каждому коту нужен дом.</p>
+    </footer>
 </body>
 </html>

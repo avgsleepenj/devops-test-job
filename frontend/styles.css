@@ -1,36 +1,366 @@
+:root {
+    color-scheme: light;
+    --background: #f7f4ef;
+    --surface: #ffffff;
+    --text: #28231f;
+    --muted: #746b64;
+    --line: #e4ddd6;
+    --accent: #d66d45;
+    --accent-dark: #ac4e2c;
+    --accent-soft: #fff0e8;
+    --success: #3d7257;
+    --shadow: 0 18px 45px rgba(56, 40, 30, 0.09);
+    --radius: 22px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    margin: 0;
+    min-width: 320px;
+    background: var(--background);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
 }
 
-#pets-table {
+button,
+input {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 78px 24px 96px;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.35), transparent 24%),
+        linear-gradient(135deg, #b85534, #e58a62);
+    color: #fff;
+}
+
+.hero::after {
+    position: absolute;
+    right: -40px;
+    bottom: -125px;
+    content: "🐾";
+    font-size: 260px;
+    opacity: 0.12;
+    transform: rotate(-18deg);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+
+.hero__text {
+    max-width: 680px;
+    margin: 28px 0 0;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.container {
+    width: min(1100px, calc(100% - 32px));
+    margin: -46px auto 72px;
+    position: relative;
+    z-index: 2;
+}
+
+.panel {
+    margin-bottom: 34px;
+    padding: clamp(22px, 4vw, 36px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--shadow);
+}
+
+.panel__heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.panel h2 {
+    margin: 0;
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
+    letter-spacing: -0.035em;
+}
+
+.panel .eyebrow {
+    color: var(--accent-dark);
+}
+
+.result-count {
+    margin: 0;
+    color: var(--muted);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filters label {
+    display: grid;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.filters input {
     width: 100%;
-    border-collapse: collapse;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    outline: none;
+    background: #fcfbf9;
+    color: var(--text);
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-#pets-table th, #pets-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.filters input:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(214, 109, 69, 0.14);
 }
 
-#pets-table th {
-    background-color: #f2f2f2;
-    color: black;
+.filters__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    padding-top: 4px;
 }
 
-#pets-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.button {
+    min-height: 46px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 13px;
+    cursor: pointer;
+    font-weight: 800;
+    transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
 }
 
-#pets-table tr:hover {
-    background-color: #eaeaea;
+.button:hover {
+    transform: translateY(-1px);
 }
 
-img {
-    width: 400px; /* или другой подходящий размер */
-    height: auto;
+.button:focus-visible {
+    outline: 3px solid rgba(214, 109, 69, 0.28);
+    outline-offset: 2px;
 }
 
-#search-bar, #filters {
-    margin-bottom: 20px;
+.button--primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 9px 20px rgba(172, 78, 44, 0.22);
+}
+
+.button--primary:hover {
+    background: var(--accent-dark);
+}
+
+.button--secondary {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+}
+
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.pet-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 12px 32px rgba(56, 40, 30, 0.07);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.pet-card__image-wrapper {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #eee8e2;
+}
+
+.pet-card__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 350ms ease;
+}
+
+.pet-card:hover .pet-card__image {
+    transform: scale(1.025);
+}
+
+.pet-card__content {
+    padding: 20px;
+}
+
+.pet-card__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pet-card h3 {
+    margin: 0;
+    font-size: 1.45rem;
+    letter-spacing: -0.025em;
+}
+
+.badge {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e7f3eb;
+    color: var(--success);
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.pet-card__details {
+    display: grid;
+    gap: 9px;
+    margin: 18px 0 0;
+}
+
+.pet-card__details div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 9px;
+    border-top: 1px solid var(--line);
+}
+
+.pet-card__details dt {
+    color: var(--muted);
+}
+
+.pet-card__details dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: right;
+}
+
+.status {
+    padding: 30px;
+    border: 1px dashed #d6cdc5;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--muted);
+    text-align: center;
+    font-weight: 700;
+}
+
+.status--error {
+    border-color: #e8b9aa;
+    background: #fff1ed;
+    color: #9c3f25;
+}
+
+footer {
+    padding: 26px 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    text-align: center;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (max-width: 900px) {
+    .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pets-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .hero {
+        padding: 58px 20px 80px;
+    }
+
+    .container {
+        width: min(100% - 20px, 1100px);
+        margin-top: -36px;
+    }
+
+    .panel__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filters,
+    .pets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters__actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
 }
